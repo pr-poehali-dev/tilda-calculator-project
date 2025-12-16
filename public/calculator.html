@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор займа</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,152 +14,306 @@
         
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
             padding: 20px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
         
         .calculator {
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 32px;
+            box-shadow: 
+                0 30px 90px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
             width: 100%;
-            max-width: 700px;
-            padding: 40px;
+            max-width: 750px;
+            padding: 50px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 40px;
-            gap: 15px;
+            justify-content: center;
+            margin-bottom: 50px;
+            gap: 20px;
+            position: relative;
         }
         
-        .arrow {
-            font-size: 40px;
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
             font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
             flex-shrink: 0;
         }
         
-        .arrow-left { color: #10B981; }
-        .arrow-right { color: #6366F1; }
+        .icon-circle:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .icon-left {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+        }
+        
+        .icon-right {
+            background: linear-gradient(135deg, #6366F1, #4F46E5);
+            color: white;
+        }
         
         .title-container {
             text-align: center;
             flex: 1;
         }
         
+        .promo-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FCD34D, #F59E0B);
+            color: #78350F;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(252, 211, 77, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
         .title {
-            font-size: 32px;
-            font-weight: 800;
-            color: #6366F1;
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1.2;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .subtitle {
-            font-size: 32px;
-            font-weight: 800;
+            font-size: 28px;
+            font-weight: 700;
             color: #10B981;
             line-height: 1.2;
         }
         
         .control-group {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .control-group:hover {
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
         }
         
         .control-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .control-label {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 600;
-            color: #374151;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .control-value {
-            font-size: 36px;
-            font-weight: 800;
-            color: #1e293b;
+            font-size: 40px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .slider-container {
             margin-top: 20px;
+            position: relative;
         }
         
         .slider {
             width: 100%;
-            height: 12px;
+            height: 14px;
             -webkit-appearance: none;
             appearance: none;
-            background: #e5e7eb;
+            background: transparent;
             outline: none;
             border-radius: 10px;
             cursor: pointer;
+            position: relative;
+        }
+        
+        .slider-track {
+            position: absolute;
+            width: 100%;
+            height: 14px;
+            background: linear-gradient(to right, #e2e8f0 0%, #e2e8f0 100%);
+            border-radius: 10px;
+            pointer-events: none;
+            top: 0;
+        }
+        
+        .slider-fill {
+            position: absolute;
+            height: 14px;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            border-radius: 10px;
+            pointer-events: none;
+            top: 0;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+            transition: width 0.1s ease;
         }
         
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 32px;
-            height: 32px;
-            background: white;
-            border: 4px solid #6366F1;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            border: 5px solid #6366F1;
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+            box-shadow: 
+                0 4px 12px rgba(99, 102, 241, 0.4),
+                0 0 0 4px rgba(99, 102, 241, 0.1);
+            position: relative;
+            z-index: 2;
+            transition: all 0.2s ease;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 
+                0 6px 18px rgba(99, 102, 241, 0.5),
+                0 0 0 6px rgba(99, 102, 241, 0.15);
+        }
+        
+        .slider::-webkit-slider-thumb:active {
+            transform: scale(1.05);
         }
         
         .slider::-moz-range-thumb {
-            width: 32px;
-            height: 32px;
-            background: white;
-            border: 4px solid #6366F1;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            border: 5px solid #6366F1;
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+            box-shadow: 
+                0 4px 12px rgba(99, 102, 241, 0.4),
+                0 0 0 4px rgba(99, 102, 241, 0.1);
+            transition: all 0.2s ease;
         }
         
-        .slider::-webkit-slider-runnable-track {
-            background: linear-gradient(to right, #6366F1 0%, #6366F1 var(--value), #e5e7eb var(--value), #e5e7eb 100%);
-            height: 12px;
-            border-radius: 10px;
-        }
-        
-        .slider::-moz-range-track {
-            background: #e5e7eb;
-            height: 12px;
-            border-radius: 10px;
-        }
-        
-        .slider::-moz-range-progress {
-            background: #6366F1;
-            height: 12px;
-            border-radius: 10px;
+        .slider::-moz-range-thumb:hover {
+            transform: scale(1.15);
         }
         
         .slider-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #9ca3af;
-            font-weight: 500;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #94a3b8;
+            font-weight: 600;
         }
         
         .result-box {
-            background: #f9fafb;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 35px;
+            box-shadow: 
+                0 20px 50px rgba(99, 102, 241, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
         .result-row {
@@ -168,12 +322,16 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .result-label {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
-            color: #374151;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .result-values {
@@ -184,135 +342,265 @@
         }
         
         .percent-badge {
-            background: #10B981;
+            background: linear-gradient(135deg, #10B981, #059669);
             color: white;
+            font-size: 24px;
+            font-weight: 900;
+            padding: 10px 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            position: relative;
+        }
+        
+        .percent-badge::after {
+            content: '🎉';
+            position: absolute;
+            top: -10px;
+            right: -10px;
             font-size: 20px;
-            font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 12px;
+            animation: bounce 1s ease infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         
         .result-amount {
-            font-size: 36px;
-            font-weight: 800;
-            color: #6366F1;
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         
-        .date-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 22px;
-            margin-bottom: 30px;
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
         }
         
-        .date-label {
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+        }
+        
+        .info-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .info-label {
+            font-size: 13px;
             font-weight: 600;
-            color: #374151;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
         
-        .date-value {
+        .info-value {
+            font-size: 24px;
             font-weight: 800;
             color: #1e293b;
         }
         
         .submit-button {
             width: 100%;
-            height: 70px;
-            background: #6366F1;
+            height: 75px;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
             color: white;
             font-size: 28px;
-            font-weight: 700;
+            font-weight: 800;
             border: none;
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            box-shadow: 
+                0 15px 40px rgba(99, 102, 241, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .submit-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
         
         .submit-button:hover {
-            background: #5558e3;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 20px 50px rgba(99, 102, 241, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
         
         .submit-button:active {
             transform: translateY(0);
         }
         
+        .submit-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .feature {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .feature-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+        }
+        
         @media (max-width: 640px) {
             .calculator {
-                padding: 24px;
-                border-radius: 16px;
+                padding: 30px;
+                border-radius: 24px;
             }
             
             .header {
-                margin-bottom: 30px;
-                gap: 10px;
+                margin-bottom: 35px;
+                gap: 12px;
             }
             
-            .arrow {
-                font-size: 28px;
+            .icon-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
             }
             
-            .title, .subtitle {
+            .promo-badge {
+                font-size: 12px;
+                padding: 5px 12px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .subtitle {
                 font-size: 20px;
             }
             
-            .control-label {
-                font-size: 18px;
-            }
-            
-            .control-value {
-                font-size: 24px;
-            }
-            
             .control-group {
+                padding: 20px;
                 margin-bottom: 30px;
             }
             
+            .control-label {
+                font-size: 14px;
+            }
+            
+            .control-value {
+                font-size: 28px;
+            }
+            
             .slider {
-                height: 10px;
+                height: 12px;
+            }
+            
+            .slider-track, .slider-fill {
+                height: 12px;
             }
             
             .slider::-webkit-slider-thumb {
-                width: 28px;
-                height: 28px;
+                width: 32px;
+                height: 32px;
+                border-width: 4px;
             }
             
             .slider::-moz-range-thumb {
-                width: 28px;
-                height: 28px;
+                width: 32px;
+                height: 32px;
+                border-width: 4px;
             }
             
             .slider-labels {
-                font-size: 12px;
+                font-size: 11px;
             }
             
             .result-box {
-                padding: 20px;
+                padding: 25px;
             }
             
             .result-label {
-                font-size: 18px;
+                font-size: 16px;
             }
             
             .percent-badge {
-                font-size: 16px;
-                padding: 6px 12px;
+                font-size: 18px;
+                padding: 8px 16px;
             }
             
             .result-amount {
+                font-size: 28px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .info-card {
+                padding: 15px;
+            }
+            
+            .info-icon {
                 font-size: 24px;
             }
             
-            .date-row {
-                font-size: 18px;
+            .info-value {
+                font-size: 20px;
             }
             
             .submit-button {
-                height: 60px;
-                font-size: 22px;
+                height: 65px;
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+            
+            .features {
+                flex-direction: column;
+                gap: 15px;
             }
         }
     </style>
@@ -320,20 +608,23 @@
 <body>
     <div class="calculator">
         <div class="header">
-            <div class="arrow arrow-right">→</div>
+            <div class="icon-circle icon-right">→</div>
             <div class="title-container">
+                <div class="promo-badge">✨ СПЕЦПРЕДЛОЖЕНИЕ</div>
                 <div class="title">Первый заем —</div>
                 <div class="subtitle">без процентов</div>
             </div>
-            <div class="arrow arrow-left">←</div>
+            <div class="icon-circle icon-left">←</div>
         </div>
         
         <div class="control-group">
             <div class="control-header">
-                <div class="control-label">Сумма</div>
+                <div class="control-label">💰 Сумма</div>
                 <div class="control-value" id="amountValue">14 000 ₽</div>
             </div>
             <div class="slider-container">
+                <div class="slider-track"></div>
+                <div class="slider-fill" id="amountFill"></div>
                 <input type="range" min="3000" max="100000" value="14000" step="1000" class="slider" id="amountSlider">
                 <div class="slider-labels">
                     <span>3 000 ₽</span>
@@ -344,10 +635,12 @@
         
         <div class="control-group">
             <div class="control-header">
-                <div class="control-label">Срок</div>
+                <div class="control-label">📅 Срок</div>
                 <div class="control-value" id="daysValue">21 день</div>
             </div>
             <div class="slider-container">
+                <div class="slider-track"></div>
+                <div class="slider-fill" id="daysFill"></div>
                 <input type="range" min="5" max="33" value="21" step="1" class="slider" id="daysSlider">
                 <div class="slider-labels">
                     <span>5 дней</span>
@@ -358,7 +651,7 @@
         
         <div class="result-box">
             <div class="result-row">
-                <div class="result-label">Возвращаете</div>
+                <div class="result-label">💎 Возвращаете</div>
                 <div class="result-values">
                     <div class="percent-badge">0%</div>
                     <div class="result-amount" id="totalAmount">14 000 ₽</div>
@@ -366,12 +659,42 @@
             </div>
         </div>
         
-        <div class="date-row">
-            <div class="date-label">До</div>
-            <div class="date-value" id="returnDate">06 января 2026</div>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">💸</div>
+                <div class="info-label">Переплата</div>
+                <div class="info-value" id="overpayment">0 ₽</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">📆</div>
+                <div class="info-label">Вернуть до</div>
+                <div class="info-value" id="returnDate">06.01.26</div>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">⚡</div>
+                <div class="info-label">Одобрение</div>
+                <div class="info-value">5 минут</div>
+            </div>
         </div>
         
-        <button class="submit-button" onclick="handleSubmit()">Получить деньги</button>
+        <button class="submit-button" onclick="handleSubmit()">
+            <span>🚀 Получить деньги</span>
+        </button>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">✅</div>
+                <div class="feature-text">Без проверки<br>кредитной истории</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-text">Безопасная<br>передача данных</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-text">Деньги на карту<br>за 15 минут</div>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -381,6 +704,9 @@
         const daysValue = document.getElementById('daysValue');
         const totalAmount = document.getElementById('totalAmount');
         const returnDate = document.getElementById('returnDate');
+        const overpayment = document.getElementById('overpayment');
+        const amountFill = document.getElementById('amountFill');
+        const daysFill = document.getElementById('daysFill');
         
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
@@ -397,21 +723,16 @@
             const returnDate = new Date(today);
             returnDate.setDate(today.getDate() + days);
             
-            const months = [
-                'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
-                'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
-            ];
-            
             const day = String(returnDate.getDate()).padStart(2, '0');
-            const month = months[returnDate.getMonth()];
-            const year = returnDate.getFullYear();
+            const month = String(returnDate.getMonth() + 1).padStart(2, '0');
+            const year = String(returnDate.getFullYear()).slice(-2);
             
-            return `${day} ${month} ${year}`;
+            return `${day}.${month}.${year}`;
         }
         
-        function updateSliderBackground(slider) {
+        function updateSliderFill(slider, fill) {
             const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
-            slider.style.setProperty('--value', value + '%');
+            fill.style.width = value + '%';
         }
         
         function updateCalculator() {
@@ -419,20 +740,22 @@
             const days = parseInt(daysSlider.value);
             const rate = 0;
             const total = amount + (amount * rate);
+            const extra = total - amount;
             
             amountValue.textContent = formatNumber(amount) + ' ₽';
             daysValue.textContent = days + ' ' + getDayWord(days);
             totalAmount.textContent = formatNumber(total) + ' ₽';
+            overpayment.textContent = formatNumber(extra) + ' ₽';
             returnDate.textContent = calculateReturnDate(days);
             
-            updateSliderBackground(amountSlider);
-            updateSliderBackground(daysSlider);
+            updateSliderFill(amountSlider, amountFill);
+            updateSliderFill(daysSlider, daysFill);
         }
         
         function handleSubmit() {
             const amount = parseInt(amountSlider.value);
             const days = parseInt(daysSlider.value);
-            alert(`Заявка на ${formatNumber(amount)} ₽ на ${days} ${getDayWord(days)}`);
+            alert(`🎉 Отлично! Ваша заявка на ${formatNumber(amount)} ₽ на ${days} ${getDayWord(days)} принята!\n\nМы свяжемся с вами в течение 5 минут.`);
         }
         
         amountSlider.addEventListener('input', updateCalculator);
