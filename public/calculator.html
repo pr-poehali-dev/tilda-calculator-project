@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор займа</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,201 +14,118 @@
         
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            background: linear-gradient(135deg, #e0e7ff 0%, #eff6ff 50%, #f3e8ff 100%);
             padding: 20px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.3), transparent);
-            top: -100px;
-            right: -100px;
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        body::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent);
-            bottom: -50px;
-            left: -50px;
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
         }
         
         .calculator {
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(249,250,251,0.95) 100%);
+            backdrop-filter: blur(10px);
             border-radius: 32px;
-            box-shadow: 
-                0 30px 90px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             width: 100%;
-            max-width: 750px;
-            padding: 50px;
+            max-width: 700px;
+            padding: 40px;
+        }
+        
+        .promo-banner {
+            background: linear-gradient(135deg, #c7d2fe 0%, #dbeafe 100%);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+        }
+        
+        .promo-banner::after {
+            content: '🎄';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 120px;
+            opacity: 0.3;
+        }
+        
+        .promo-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+            line-height: 1.2;
             position: relative;
             z-index: 1;
-            backdrop-filter: blur(10px);
-            animation: slideUp 0.6s ease-out;
         }
         
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 50px;
-            gap: 20px;
+        .promo-text {
+            font-size: 18px;
+            color: #374151;
+            margin-bottom: 24px;
+            line-height: 1.5;
             position: relative;
+            z-index: 1;
         }
         
-        .icon-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        .promo-button {
+            background: #111827;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
             transition: all 0.3s ease;
-            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
         }
         
-        .icon-circle:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-        
-        .icon-left {
-            background: linear-gradient(135deg, #10B981, #059669);
-            color: white;
-        }
-        
-        .icon-right {
-            background: linear-gradient(135deg, #6366F1, #4F46E5);
-            color: white;
-        }
-        
-        .title-container {
-            text-align: center;
-            flex: 1;
-        }
-        
-        .promo-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #FCD34D, #F59E0B);
-            color: #78350F;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(252, 211, 77, 0.4);
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .title {
-            font-size: 36px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #6366F1, #8B5CF6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
-            margin-bottom: 8px;
-        }
-        
-        .subtitle {
-            font-size: 28px;
-            font-weight: 700;
-            color: #10B981;
-            line-height: 1.2;
+        .promo-button:hover {
+            background: #1f2937;
+            transform: scale(1.05);
         }
         
         .control-group {
-            margin-bottom: 45px;
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-        
-        .control-group:hover {
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
-            transform: translateY(-2px);
+            margin-bottom: 32px;
         }
         
         .control-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         
         .control-label {
-            font-size: 18px;
-            font-weight: 600;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 22px;
+            font-weight: 400;
+            color: #374151;
         }
         
         .control-value {
             font-size: 40px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #1e293b, #334155);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 700;
+            color: #111827;
         }
         
         .slider-container {
-            margin-top: 20px;
             position: relative;
+            padding-top: 8px;
         }
         
         .slider {
             width: 100%;
-            height: 14px;
+            height: 12px;
             -webkit-appearance: none;
             appearance: none;
             background: transparent;
             outline: none;
-            border-radius: 10px;
             cursor: pointer;
             position: relative;
         }
@@ -216,122 +133,65 @@
         .slider-track {
             position: absolute;
             width: 100%;
-            height: 14px;
-            background: linear-gradient(to right, #e2e8f0 0%, #e2e8f0 100%);
+            height: 12px;
+            background: #e5e7eb;
             border-radius: 10px;
             pointer-events: none;
-            top: 0;
+            top: 8px;
         }
         
         .slider-fill {
             position: absolute;
-            height: 14px;
-            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            height: 12px;
+            background: #fbbf24;
             border-radius: 10px;
             pointer-events: none;
-            top: 0;
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+            top: 8px;
             transition: width 0.1s ease;
         }
         
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(145deg, #ffffff, #f1f5f9);
-            border: 5px solid #6366F1;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 6px solid #fbbf24;
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: 
-                0 4px 12px rgba(99, 102, 241, 0.4),
-                0 0 0 4px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             position: relative;
             z-index: 2;
-            transition: all 0.2s ease;
-        }
-        
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.15);
-            box-shadow: 
-                0 6px 18px rgba(99, 102, 241, 0.5),
-                0 0 0 6px rgba(99, 102, 241, 0.15);
-        }
-        
-        .slider::-webkit-slider-thumb:active {
-            transform: scale(1.05);
         }
         
         .slider::-moz-range-thumb {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(145deg, #ffffff, #f1f5f9);
-            border: 5px solid #6366F1;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 6px solid #fbbf24;
             cursor: pointer;
             border-radius: 50%;
-            box-shadow: 
-                0 4px 12px rgba(99, 102, 241, 0.4),
-                0 0 0 4px rgba(99, 102, 241, 0.1);
-            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         
-        .slider::-moz-range-thumb:hover {
-            transform: scale(1.15);
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            padding-top: 16px;
+            margin-bottom: 32px;
         }
         
-        .slider-labels {
+        .result-item {
             display: flex;
-            justify-content: space-between;
-            margin-top: 12px;
-            font-size: 13px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        
-        .result-box {
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            border-radius: 24px;
-            padding: 35px;
-            margin-bottom: 35px;
-            box-shadow: 
-                0 20px 50px rgba(99, 102, 241, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .result-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-            animation: rotate 10s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .result-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            position: relative;
-            z-index: 1;
+            flex-direction: column;
         }
         
         .result-label {
-            font-size: 20px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 18px;
+            font-weight: 400;
+            color: #6b7280;
+            margin-bottom: 12px;
         }
         
         .result-values {
@@ -341,359 +201,215 @@
             flex-wrap: wrap;
         }
         
-        .percent-badge {
-            background: linear-gradient(135deg, #10B981, #059669);
-            color: white;
-            font-size: 24px;
-            font-weight: 900;
-            padding: 10px 20px;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-            position: relative;
-        }
-        
-        .percent-badge::after {
-            content: '🎉';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 20px;
-            animation: bounce 1s ease infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .result-amount {
-            font-size: 42px;
-            font-weight: 900;
-            color: white;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 35px;
-        }
-        
-        .info-card {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .info-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
-        }
-        
-        .info-icon {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        
-        .info-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-        
-        .info-value {
-            font-size: 24px;
-            font-weight: 800;
-            color: #1e293b;
-        }
-        
-        .submit-button {
-            width: 100%;
-            height: 75px;
-            background: linear-gradient(135deg, #6366F1, #8B5CF6);
-            color: white;
+        .old-price {
             font-size: 28px;
-            font-weight: 800;
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-weight: 500;
+        }
+        
+        .new-price {
+            background: #fde047;
+            color: #111827;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 16px;
+        }
+        
+        .date-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+        }
+        
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            height: 72px;
+            background: #2563eb;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
             border: none;
-            border-radius: 20px;
+            border-radius: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 
-                0 15px 40px rgba(99, 102, 241, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
         }
         
-        .submit-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.4);
         }
         
-        .submit-button:hover::before {
-            width: 300px;
-            height: 300px;
+        .gosuslugi {
+            color: #ef4444;
         }
         
-        .submit-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                0 20px 50px rgba(99, 102, 241, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        .btn-secondary {
+            width: 100%;
+            height: 72px;
+            background: white;
+            color: #111827;
+            font-size: 24px;
+            font-weight: 700;
+            border: 4px solid #fbbf24;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.2);
         }
         
-        .submit-button:active {
-            transform: translateY(0);
+        .btn-secondary:hover {
+            background: #fef3c7;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(251, 191, 36, 0.3);
         }
         
-        .submit-button span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .features {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 2px solid #e2e8f0;
-        }
-        
-        .feature {
+        .help-link {
             text-align: center;
+            padding-top: 16px;
         }
         
-        .feature-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
+        .help-link a {
+            color: #2563eb;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: underline;
+            transition: color 0.2s ease;
         }
         
-        .feature-text {
-            font-size: 13px;
-            font-weight: 600;
-            color: #64748b;
+        .help-link a:hover {
+            color: #1d4ed8;
         }
         
         @media (max-width: 640px) {
             .calculator {
-                padding: 30px;
+                padding: 24px;
                 border-radius: 24px;
             }
             
-            .header {
-                margin-bottom: 35px;
-                gap: 12px;
+            .promo-banner {
+                padding: 24px;
             }
             
-            .icon-circle {
-                width: 50px;
-                height: 50px;
+            .promo-banner::after {
+                font-size: 80px;
+            }
+            
+            .promo-title {
                 font-size: 24px;
             }
             
-            .promo-badge {
-                font-size: 12px;
-                padding: 5px 12px;
-            }
-            
-            .title {
-                font-size: 24px;
-            }
-            
-            .subtitle {
-                font-size: 20px;
-            }
-            
-            .control-group {
-                padding: 20px;
-                margin-bottom: 30px;
+            .promo-text {
+                font-size: 16px;
             }
             
             .control-label {
-                font-size: 14px;
+                font-size: 18px;
             }
             
             .control-value {
                 font-size: 28px;
             }
             
-            .slider {
-                height: 12px;
-            }
-            
-            .slider-track, .slider-fill {
-                height: 12px;
-            }
-            
             .slider::-webkit-slider-thumb {
-                width: 32px;
-                height: 32px;
-                border-width: 4px;
+                width: 36px;
+                height: 36px;
+                border-width: 5px;
             }
             
             .slider::-moz-range-thumb {
-                width: 32px;
-                height: 32px;
-                border-width: 4px;
+                width: 36px;
+                height: 36px;
+                border-width: 5px;
             }
             
-            .slider-labels {
-                font-size: 11px;
-            }
-            
-            .result-box {
-                padding: 25px;
+            .result-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .result-label {
                 font-size: 16px;
             }
             
-            .percent-badge {
-                font-size: 18px;
-                padding: 8px 16px;
+            .old-price, .new-price, .date-value {
+                font-size: 22px;
             }
             
-            .result-amount {
-                font-size: 28px;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .info-card {
-                padding: 15px;
-            }
-            
-            .info-icon {
-                font-size: 24px;
-            }
-            
-            .info-value {
+            .btn-primary, .btn-secondary {
+                height: 64px;
                 font-size: 20px;
-            }
-            
-            .submit-button {
-                height: 65px;
-                font-size: 20px;
-                letter-spacing: 1px;
-            }
-            
-            .features {
-                flex-direction: column;
-                gap: 15px;
             }
         }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <div class="header">
-            <div class="icon-circle icon-right">→</div>
-            <div class="title-container">
-                <div class="promo-badge">✨ СПЕЦПРЕДЛОЖЕНИЕ</div>
-                <div class="title">Первый заем —</div>
-                <div class="subtitle">без процентов</div>
-            </div>
-            <div class="icon-circle icon-left">←</div>
+        <div class="promo-banner">
+            <h1 class="promo-title">Погасим заём за вас!</h1>
+            <p class="promo-text">Выберем 50 счастливчиков, за которых закроем заём 15 января</p>
+            <button class="promo-button">Участвовать в акции</button>
         </div>
         
         <div class="control-group">
             <div class="control-header">
-                <div class="control-label">💰 Сумма</div>
-                <div class="control-value" id="amountValue">14 000 ₽</div>
+                <div class="control-label">Сумма</div>
+                <div class="control-value" id="amountValue">10 000 ₽</div>
             </div>
             <div class="slider-container">
                 <div class="slider-track"></div>
                 <div class="slider-fill" id="amountFill"></div>
-                <input type="range" min="3000" max="100000" value="14000" step="1000" class="slider" id="amountSlider">
-                <div class="slider-labels">
-                    <span>3 000 ₽</span>
-                    <span>100 000 ₽</span>
-                </div>
+                <input type="range" min="3000" max="100000" value="10000" step="1000" class="slider" id="amountSlider">
             </div>
         </div>
         
         <div class="control-group">
             <div class="control-header">
-                <div class="control-label">📅 Срок</div>
-                <div class="control-value" id="daysValue">21 день</div>
+                <div class="control-label">Срок</div>
+                <div class="control-value" id="daysValue">10 дней</div>
             </div>
             <div class="slider-container">
                 <div class="slider-track"></div>
                 <div class="slider-fill" id="daysFill"></div>
-                <input type="range" min="5" max="33" value="21" step="1" class="slider" id="daysSlider">
-                <div class="slider-labels">
-                    <span>5 дней</span>
-                    <span>33 дня</span>
-                </div>
+                <input type="range" min="5" max="33" value="10" step="1" class="slider" id="daysSlider">
             </div>
         </div>
         
-        <div class="result-box">
-            <div class="result-row">
-                <div class="result-label">💎 Возвращаете</div>
+        <div class="result-grid">
+            <div class="result-item">
+                <div class="result-label">Возвращаете</div>
                 <div class="result-values">
-                    <div class="percent-badge">0%</div>
-                    <div class="result-amount" id="totalAmount">14 000 ₽</div>
+                    <span class="old-price" id="oldPrice">11 000 ₽</span>
+                    <span class="new-price" id="newPrice">10 720 ₽</span>
                 </div>
             </div>
-        </div>
-        
-        <div class="info-grid">
-            <div class="info-card">
-                <div class="info-icon">💸</div>
-                <div class="info-label">Переплата</div>
-                <div class="info-value" id="overpayment">0 ₽</div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">📆</div>
-                <div class="info-label">Вернуть до</div>
-                <div class="info-value" id="returnDate">06.01.26</div>
-            </div>
-            <div class="info-card">
-                <div class="info-icon">⚡</div>
-                <div class="info-label">Одобрение</div>
-                <div class="info-value">5 минут</div>
+            <div class="result-item">
+                <div class="result-label">Дата возврата</div>
+                <div class="date-value" id="returnDate">26 декабря 2025</div>
             </div>
         </div>
         
-        <button class="submit-button" onclick="handleSubmit()">
-            <span>🚀 Получить деньги</span>
-        </button>
+        <div class="button-group">
+            <button class="btn-primary" onclick="handleGosuslugi()">
+                Получить через <span class="gosuslugi">гос</span>услуги
+            </button>
+            <button class="btn-secondary" onclick="handleFree()">
+                Получить бесплатно
+            </button>
+        </div>
         
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">✅</div>
-                <div class="feature-text">Без проверки<br>кредитной истории</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔒</div>
-                <div class="feature-text">Безопасная<br>передача данных</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-text">Деньги на карту<br>за 15 минут</div>
-            </div>
+        <div class="help-link">
+            <a href="#">Что если я не успею вернуть заём вовремя?</a>
         </div>
     </div>
     
@@ -702,9 +418,9 @@
         const daysSlider = document.getElementById('daysSlider');
         const amountValue = document.getElementById('amountValue');
         const daysValue = document.getElementById('daysValue');
-        const totalAmount = document.getElementById('totalAmount');
+        const oldPrice = document.getElementById('oldPrice');
+        const newPrice = document.getElementById('newPrice');
         const returnDate = document.getElementById('returnDate');
-        const overpayment = document.getElementById('overpayment');
         const amountFill = document.getElementById('amountFill');
         const daysFill = document.getElementById('daysFill');
         
@@ -723,11 +439,16 @@
             const returnDate = new Date(today);
             returnDate.setDate(today.getDate() + days);
             
-            const day = String(returnDate.getDate()).padStart(2, '0');
-            const month = String(returnDate.getMonth() + 1).padStart(2, '0');
-            const year = String(returnDate.getFullYear()).slice(-2);
+            const months = [
+                'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+                'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+            ];
             
-            return `${day}.${month}.${year}`;
+            const day = returnDate.getDate();
+            const month = months[returnDate.getMonth()];
+            const year = returnDate.getFullYear();
+            
+            return `${day} ${month} ${year}`;
         }
         
         function updateSliderFill(slider, fill) {
@@ -738,24 +459,29 @@
         function updateCalculator() {
             const amount = parseInt(amountSlider.value);
             const days = parseInt(daysSlider.value);
-            const rate = 0;
-            const total = amount + (amount * rate);
-            const extra = total - amount;
+            const rate = 0.072;
+            const total = Math.round(amount + (amount * rate));
+            const oldTotal = Math.round(amount * 1.1);
             
             amountValue.textContent = formatNumber(amount) + ' ₽';
             daysValue.textContent = days + ' ' + getDayWord(days);
-            totalAmount.textContent = formatNumber(total) + ' ₽';
-            overpayment.textContent = formatNumber(extra) + ' ₽';
+            oldPrice.textContent = formatNumber(oldTotal) + ' ₽';
+            newPrice.textContent = formatNumber(total) + ' ₽';
             returnDate.textContent = calculateReturnDate(days);
             
             updateSliderFill(amountSlider, amountFill);
             updateSliderFill(daysSlider, daysFill);
         }
         
-        function handleSubmit() {
+        function handleGosuslugi() {
             const amount = parseInt(amountSlider.value);
             const days = parseInt(daysSlider.value);
-            alert(`🎉 Отлично! Ваша заявка на ${formatNumber(amount)} ₽ на ${days} ${getDayWord(days)} принята!\n\nМы свяжемся с вами в течение 5 минут.`);
+            alert(`Заявка на ${formatNumber(amount)} ₽ через Госуслуги отправлена!`);
+        }
+        
+        function handleFree() {
+            const amount = parseInt(amountSlider.value);
+            alert(`Бесплатная заявка на ${formatNumber(amount)} ₽ отправлена!`);
         }
         
         amountSlider.addEventListener('input', updateCalculator);
