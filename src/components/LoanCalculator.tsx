@@ -64,14 +64,14 @@ export default function LoanCalculator() {
                 </span>
               </div>
               
-              <div className="relative pt-2 touch-pan-y">
+              <div className="relative pt-4 pb-2 touch-pan-y">
                 <Slider
                   value={[amount]}
                   onValueChange={(value) => setAmount(value[0])}
                   min={minAmount}
                   max={maxAmount}
                   step={1000}
-                  className="w-full [&_[role=slider]]:bg-white [&_[role=slider]]:border-[5px] sm:[&_[role=slider]]:border-[6px] [&_[role=slider]]:border-yellow-400 [&_[role=slider]]:shadow-lg [&_[role=slider]]:w-9 [&_[role=slider]]:h-9 sm:[&_[role=slider]]:w-10 sm:[&_[role=slider]]:h-10 [&>span]:bg-gray-200 [&>span>span]:bg-yellow-400 [&>span]:h-3 sm:[&>span]:h-3.5"
+                  className="w-full [&_[role=slider]]:bg-white [&_[role=slider]]:border-[6px] [&_[role=slider]]:border-yellow-400 [&_[role=slider]]:shadow-lg [&_[role=slider]]:w-11 [&_[role=slider]]:h-11 sm:[&_[role=slider]]:w-12 sm:[&_[role=slider]]:h-12 [&>span]:bg-gray-200 [&>span>span]:bg-yellow-400 [&>span]:h-3.5 sm:[&>span]:h-4"
                 />
               </div>
             </div>
@@ -86,14 +86,14 @@ export default function LoanCalculator() {
                 </span>
               </div>
               
-              <div className="relative pt-2 touch-pan-y">
+              <div className="relative pt-4 pb-2 touch-pan-y">
                 <Slider
                   value={[days]}
                   onValueChange={(value) => setDays(value[0])}
                   min={minDays}
                   max={maxDays}
                   step={1}
-                  className="w-full [&_[role=slider]]:bg-white [&_[role=slider]]:border-[5px] sm:[&_[role=slider]]:border-[6px] [&_[role=slider]]:border-yellow-400 [&_[role=slider]]:shadow-lg [&_[role=slider]]:w-9 [&_[role=slider]]:h-9 sm:[&_[role=slider]]:w-10 sm:[&_[role=slider]]:h-10 [&>span]:bg-gray-200 [&>span>span]:bg-yellow-400 [&>span]:h-3 sm:[&>span]:h-3.5"
+                  className="w-full [&_[role=slider]]:bg-white [&_[role=slider]]:border-[6px] [&_[role=slider]]:border-yellow-400 [&_[role=slider]]:shadow-lg [&_[role=slider]]:w-11 [&_[role=slider]]:h-11 sm:[&_[role=slider]]:w-12 sm:[&_[role=slider]]:h-12 [&>span]:bg-gray-200 [&>span>span]:bg-yellow-400 [&>span]:h-3.5 sm:[&>span]:h-4"
                 />
               </div>
             </div>
@@ -138,11 +138,6 @@ export default function LoanCalculator() {
               </Button>
             </div>
 
-            <div className="text-center pt-3 sm:pt-4">
-              <a href="#" className="text-blue-600 hover:text-blue-700 active:text-blue-800 text-sm sm:text-base md:text-lg font-medium underline">
-                Что если я не успею вернуть заём вовремя?
-              </a>
-            </div>
           </div>
 
           <div className="mt-8 pt-6 border-t-2 border-gray-200">

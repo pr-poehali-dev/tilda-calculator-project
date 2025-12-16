@@ -74,12 +74,13 @@
         
         .slider-container {
             position: relative;
-            padding-top: 8px;
+            padding-top: 16px;
+            padding-bottom: 8px;
         }
         
         .slider {
             width: 100%;
-            height: 12px;
+            height: 14px;
             -webkit-appearance: none;
             appearance: none;
             background: transparent;
@@ -92,28 +93,28 @@
         .slider-track {
             position: absolute;
             width: 100%;
-            height: 12px;
+            height: 14px;
             background: #e5e7eb;
             border-radius: 10px;
             pointer-events: none;
-            top: 8px;
+            top: 16px;
         }
         
         .slider-fill {
             position: absolute;
-            height: 12px;
+            height: 14px;
             background: #fbbf24;
             border-radius: 10px;
             pointer-events: none;
-            top: 8px;
+            top: 16px;
             transition: width 0.1s ease;
         }
         
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             background: white;
             border: 6px solid #fbbf24;
             cursor: pointer;
@@ -124,8 +125,8 @@
         }
         
         .slider::-moz-range-thumb {
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             background: white;
             border: 6px solid #fbbf24;
             cursor: pointer;
