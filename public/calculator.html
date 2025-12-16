@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор займа</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .calculator {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 700px;
+            padding: 40px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 15px;
+        }
+        
+        .arrow {
+            font-size: 40px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .arrow-left { color: #10B981; }
+        .arrow-right { color: #6366F1; }
+        
+        .title-container {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #6366F1;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 32px;
+            font-weight: 800;
+            color: #10B981;
+            line-height: 1.2;
+        }
+        
+        .control-group {
+            margin-bottom: 40px;
+        }
+        
+        .control-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .control-label {
+            font-size: 22px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .control-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1e293b;
+        }
+        
+        .slider-container {
+            margin-top: 20px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 12px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #e5e7eb;
+            outline: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 4px solid #6366F1;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 4px solid #6366F1;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+        }
+        
+        .slider::-webkit-slider-runnable-track {
+            background: linear-gradient(to right, #6366F1 0%, #6366F1 var(--value), #e5e7eb var(--value), #e5e7eb 100%);
+            height: 12px;
+            border-radius: 10px;
+        }
+        
+        .slider::-moz-range-track {
+            background: #e5e7eb;
+            height: 12px;
+            border-radius: 10px;
+        }
+        
+        .slider::-moz-range-progress {
+            background: #6366F1;
+            height: 12px;
+            border-radius: 10px;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+        
+        .result-box {
+            background: #f9fafb;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .result-label {
+            font-size: 22px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .result-values {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .percent-badge {
+            background: #10B981;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 12px;
+        }
+        
+        .result-amount {
+            font-size: 36px;
+            font-weight: 800;
+            color: #6366F1;
+        }
+        
+        .date-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+        
+        .date-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .date-value {
+            font-weight: 800;
+            color: #1e293b;
+        }
+        
+        .submit-button {
+            width: 100%;
+            height: 70px;
+            background: #6366F1;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+        
+        .submit-button:hover {
+            background: #5558e3;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+        
+        .submit-button:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 640px) {
+            .calculator {
+                padding: 24px;
+                border-radius: 16px;
+            }
+            
+            .header {
+                margin-bottom: 30px;
+                gap: 10px;
+            }
+            
+            .arrow {
+                font-size: 28px;
+            }
+            
+            .title, .subtitle {
+                font-size: 20px;
+            }
+            
+            .control-label {
+                font-size: 18px;
+            }
+            
+            .control-value {
+                font-size: 24px;
+            }
+            
+            .control-group {
+                margin-bottom: 30px;
+            }
+            
+            .slider {
+                height: 10px;
+            }
+            
+            .slider::-webkit-slider-thumb {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .slider::-moz-range-thumb {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .slider-labels {
+                font-size: 12px;
+            }
+            
+            .result-box {
+                padding: 20px;
+            }
+            
+            .result-label {
+                font-size: 18px;
+            }
+            
+            .percent-badge {
+                font-size: 16px;
+                padding: 6px 12px;
+            }
+            
+            .result-amount {
+                font-size: 24px;
+            }
+            
+            .date-row {
+                font-size: 18px;
+            }
+            
+            .submit-button {
+                height: 60px;
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="header">
+            <div class="arrow arrow-right">→</div>
+            <div class="title-container">
+                <div class="title">Первый заем —</div>
+                <div class="subtitle">без процентов</div>
+            </div>
+            <div class="arrow arrow-left">←</div>
+        </div>
+        
+        <div class="control-group">
+            <div class="control-header">
+                <div class="control-label">Сумма</div>
+                <div class="control-value" id="amountValue">14 000 ₽</div>
+            </div>
+            <div class="slider-container">
+                <input type="range" min="3000" max="100000" value="14000" step="1000" class="slider" id="amountSlider">
+                <div class="slider-labels">
+                    <span>3 000 ₽</span>
+                    <span>100 000 ₽</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <div class="control-header">
+                <div class="control-label">Срок</div>
+                <div class="control-value" id="daysValue">21 день</div>
+            </div>
+            <div class="slider-container">
+                <input type="range" min="5" max="33" value="21" step="1" class="slider" id="daysSlider">
+                <div class="slider-labels">
+                    <span>5 дней</span>
+                    <span>33 дня</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="result-box">
+            <div class="result-row">
+                <div class="result-label">Возвращаете</div>
+                <div class="result-values">
+                    <div class="percent-badge">0%</div>
+                    <div class="result-amount" id="totalAmount">14 000 ₽</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="date-row">
+            <div class="date-label">До</div>
+            <div class="date-value" id="returnDate">06 января 2026</div>
+        </div>
+        
+        <button class="submit-button" onclick="handleSubmit()">Получить деньги</button>
+    </div>
+    
+    <script>
+        const amountSlider = document.getElementById('amountSlider');
+        const daysSlider = document.getElementById('daysSlider');
+        const amountValue = document.getElementById('amountValue');
+        const daysValue = document.getElementById('daysValue');
+        const totalAmount = document.getElementById('totalAmount');
+        const returnDate = document.getElementById('returnDate');
+        
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        }
+        
+        function getDayWord(days) {
+            if (days === 1 || (days % 10 === 1 && days !== 11)) return 'день';
+            if ((days >= 2 && days <= 4) || (days % 10 >= 2 && days % 10 <= 4 && (days < 10 || days > 20))) return 'дня';
+            return 'дней';
+        }
+        
+        function calculateReturnDate(days) {
+            const today = new Date();
+            const returnDate = new Date(today);
+            returnDate.setDate(today.getDate() + days);
+            
+            const months = [
+                'января', 'февраля', 'марта', 'апреля', 'мая', 'июня',
+                'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'
+            ];
+            
+            const day = String(returnDate.getDate()).padStart(2, '0');
+            const month = months[returnDate.getMonth()];
+            const year = returnDate.getFullYear();
+            
+            return `${day} ${month} ${year}`;
+        }
+        
+        function updateSliderBackground(slider) {
+            const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+            slider.style.setProperty('--value', value + '%');
+        }
+        
+        function updateCalculator() {
+            const amount = parseInt(amountSlider.value);
+            const days = parseInt(daysSlider.value);
+            const rate = 0;
+            const total = amount + (amount * rate);
+            
+            amountValue.textContent = formatNumber(amount) + ' ₽';
+            daysValue.textContent = days + ' ' + getDayWord(days);
+            totalAmount.textContent = formatNumber(total) + ' ₽';
+            returnDate.textContent = calculateReturnDate(days);
+            
+            updateSliderBackground(amountSlider);
+            updateSliderBackground(daysSlider);
+        }
+        
+        function handleSubmit() {
+            const amount = parseInt(amountSlider.value);
+            const days = parseInt(daysSlider.value);
+            alert(`Заявка на ${formatNumber(amount)} ₽ на ${days} ${getDayWord(days)}`);
+        }
+        
+        amountSlider.addEventListener('input', updateCalculator);
+        daysSlider.addEventListener('input', updateCalculator);
+        
+        updateCalculator();
+    </script>
+</body>
+</html>
